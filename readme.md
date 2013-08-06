@@ -3,64 +3,67 @@
 
 ## Features
 
-    * Pug Helper Form: A dialog GUI to the pug so you don't need to type commands anymore.
-    * Sounds: Sounds on all major events in pug eg: Teams being drafted, Sub Needed, afk notices, when it's your turn to pick as captain, that you have been picked and the game is starting, etc..
-    * Auto Launch Mumble/TF2: When teams are done being drafted and the pug starts, when you get a message from the pug messenger, a sound notification will tell you you what team you're on and what server, and mumble will launch and connect to the correct channel, and TF2 will launch and connect to the correct server. It also automatically sticks the server connect information into your clipboard if you need to use it in game.
-    * Anti AFK: Respond automatically to the bot's AFK message to un-afk yourself. Note: You will be restricted if you do not show up to the PUG because you were ACTUALLY afk.
-	* Pug Message Window: Automatically terminates all private messages from the PUG Bot and Messengers, and sticks all of the messages into a single window so you don't have a bunch of PMs open.
+* Pug Helper Form: A dialog GUI to the pug so you don't need to type commands anymore.
+* Sounds: Sounds on all major events in pug eg: Teams being drafted, Sub Needed, afk notices, when it's your turn to pick as captain, that you have been picked and the game is starting, etc..
+* Auto Launch Mumble/TF2: When teams are done being drafted and the pug starts, when you get a message from the pug messenger, a sound notification will tell you you what team you're on and what server, and mumble will launch and connect to the correct channel, and TF2 will launch and connect to the correct server. It also automatically sticks the server connect information into your clipboard if you need to use it in game.
+* Anti AFK: Respond automatically to the bot's AFK message to un-afk yourself. Note: You will be restricted if you do not show up to the PUG because you were ACTUALLY afk.
+* Pug Message Window: Automatically terminates all private messages from the PUG Bot and Messengers, and sticks all of the messages into a single window so you don't have a bunch of PMs open.
 	
 ## Commands
-  
-  Note: Most commands are only for shortcuts and are available via the GUI or toolbar.
+Note: Most commands are only for shortcuts and are available via the GUI or toolbar.
 
-  ### pug 
-  Shows the tf2.pug helper form
+### pug 
+Shows the tf2.pug helper form
   
-  ### pugchannel [channel]
-  changes active channel between #tf2.pug.na, #tf2.pug.nahl, #tf2.mix.nahl
   
-  ### Toggle Classes
-  Toggles classes on and off for the pugadd command or Add button on the dialog
-  `/captain /scout /soldier /pyro /demo /heavy /engineer /medic /sniper /spy /roamer /pocket`
+### pugchannel [channel]
+changes active channel between #tf2.pug.na, #tf2.pug.nahl, #tf2.mix.nahl
   
-  ### pugadd
-  Adds to pug as the selected classes you have toggled on the UI or with Commands
   
-  ### pugremove
-  Removes from pug
+### Toggle Classes
+Toggles classes on and off for the pugadd command or Add button on the dialog
+`/captain /scout /soldier /pyro /demo /heavy /engineer /medic /sniper /spy /roamer /pocket`
   
-  ### mumble [server] [team]
-  connect to mumble on the **[server]** of your choice to the **[team]** of your choice. 
-  `Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
-  `Teams: red, blue`
   
-  ### tf2 [server]
-  Connect to tf2 server. 
-  `Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
+### pugadd
+Adds to pug as the selected classes you have toggled on the UI or with Commands
   
-  ### pugantiafk
-  Toggles anti afk ON or OFF
+### pugremove
+Removes from pug
   
-  ### antiafkmsg [message]
-  Set anti-afk message to [message]. Default message: :)
   
-  ### pugautosounds
-  Toggles Auto Sounds ON and OFF (Turns sounds on when you're added up, and sounds off after the game starts)
+### mumble [server] [team]
+connect to mumble on the **[server]** of your choice to the **[team]** of your choice. 
+`Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
+`Teams: red, blue`
+ 
+### tf2 [server]
+Connect to tf2 server. 
+`Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
   
-  ### pugsounds
-  Toggles the sounds ON or OFF (Note: if you have auto sounds on, it will get changed unless you turn auto sounds off)
+### pugantiafk
+Toggles anti afk ON or OFF
   
-  ### pugsounddirectory [directory]
-  Set pug sounds directory to [directory]. Default directory: sounds/
+### antiafkmsg [message]
+Set anti-afk message to [message]. Default message: :)
   
-  ### mumbleusername [name]
-  Set your mumble user name to [name].
+### pugautosounds
+Toggles Auto Sounds ON and OFF (Turns sounds on when you're added up, and sounds off after the game starts)
   
-  ### mumbledirectory [directory]
-  Set your mumble directory to [directory].
+### pugsounds
+Toggles the sounds ON or OFF (Note: if you have auto sounds on, it will get changed unless you turn auto sounds off)
+
+### pugsounddirectory [directory]
+Set pug sounds directory to [directory]. Default directory: sounds/
   
-  ### steamdirectory [directory]
-  Set your steam directory to [directory].
+### mumbleusername [name]
+Set your mumble user name to [name].
+  
+### mumbledirectory [directory]
+Set your mumble directory to [directory].
+  
+### steamdirectory [directory]
+Set your steam directory to [directory].
 
 ## Installation Instructions
 
