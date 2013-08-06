@@ -1,5 +1,4 @@
-# tf2 pug script by Dad
-### bugs or suggestions: Dad on gamesurge
+# tf2 pug script for mIRC by Dad
 
 ## Features
 
@@ -12,25 +11,24 @@
 ## Commands
 Note: Most commands are only for shortcuts and are available via the GUI or toolbar.
 
+### /advert
+Advertise this script in the current channel <3
+
 ### /pug 
 Shows the tf2.pug helper form
-  
-  
+    
 ### /pugchannel [channel]
 changes active channel between #tf2.pug.na, #tf2.pug.nahl, #tf2.mix.nahl
-  
   
 ### Toggle Classes
 Toggles classes on and off for the pugadd command or Add button on the dialog
 `/captain /scout /soldier /pyro /demo /heavy /engineer /medic /sniper /spy /roamer /pocket`
-  
   
 ### /pugadd
 Adds to pug as the selected classes you have toggled on the UI or with Commands
   
 ### /pugremove
 Removes from pug
-  
   
 ### /mumble [server] [team]
 connect to mumble on the **[server]** of your choice to the **[team]** of your choice. 
@@ -99,7 +97,8 @@ Q: **My sounds arent working!**
 
 A: Did you extract the script to some weird directory? After you load the script type `/pugsounddirectory [filepath]` and type in the path to your sounds into the dialog that pops up. But make sure it ends with a trailing backslash or it won't work! eg: `"C:\MyPath\ToTheScript\sounds\"` the last \ is important!
 
-
+## Bug Reports or Questions
+Contact Dad on Gamesurge, or leave a bug report here on Github.
 
 ## Changelog
 

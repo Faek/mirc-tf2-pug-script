@@ -127,7 +127,7 @@ alias pugrehash {
 alias pugfirstload {
   echo -a ********************************************************************
   echo -a 0
-  echo -a 5tf2.pug helper 1by 6Dad
+  echo -a 5tf2.pug helper 1by 6Dad - https://github.com/Faek/mirc-tf2-pug-script
   echo -a type 5/pughelp 1for commands
   echo -a bug reports: 6Dad 1on 6Gamesurge
   echo -a 0
@@ -141,7 +141,7 @@ alias pugfirstload {
   set %pughelper.enableSounds 0
   set %pughelper.autoToggleSounds 1
   set %pughelper.antiAFK 0
-  set %pughelper.antiAFKmsg :)
+  set %pughelper.antiAFKmsg Dad's TF2 Pug Script Anti-AFK: https://github.com/Faek/mirc-tf2-pug-script
   set %pughelper.addCaptain 0
   set %pughelper.addScout 0
   set %pughelper.addSoldier 0
@@ -170,7 +170,7 @@ alias pugfirstload {
 alias pughelp {
   echo -a ************************************************************************************************
   echo -a 0
-  echo -a 5tf2.pug helper 1by 6Dad
+  echo -a 5tf2.pug helper 1by 6Dad - https://github.com/Faek/mirc-tf2-pug-script
   echo -a 3Available Commands:
   echo -a 5/pug 1: Shows the tf2.pug helper form
   echo -a 5/pugchannel 2[channel] 1: changes active channel between $(%pughelper.channel1) and $(%pughelper.channel2) and $(%pughelper.channel3)
@@ -192,6 +192,12 @@ alias pughelp {
   echo -a bug reports: 6Dad 1on 6Gamesurge
   echo -a 0
   echo -a ************************************************************************************************
+}
+
+alias advert {
+  
+  msg $chan I am using Dad's TF2 Pug Script for mIRC! Get it here: https://github.com/Faek/mirc-tf2-pug-script
+  
 }
 
 ;load pug helper dialog
