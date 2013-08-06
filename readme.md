@@ -12,11 +12,11 @@
 ## Commands
 Note: Most commands are only for shortcuts and are available via the GUI or toolbar.
 
-### pug 
+### /pug 
 Shows the tf2.pug helper form
   
   
-### pugchannel [channel]
+### /pugchannel [channel]
 changes active channel between #tf2.pug.na, #tf2.pug.nahl, #tf2.mix.nahl
   
   
@@ -25,44 +25,44 @@ Toggles classes on and off for the pugadd command or Add button on the dialog
 `/captain /scout /soldier /pyro /demo /heavy /engineer /medic /sniper /spy /roamer /pocket`
   
   
-### pugadd
+### /pugadd
 Adds to pug as the selected classes you have toggled on the UI or with Commands
   
-### pugremove
+### /pugremove
 Removes from pug
   
   
-### mumble [server] [team]
+### /mumble [server] [team]
 connect to mumble on the **[server]** of your choice to the **[team]** of your choice. 
 `Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
 `Teams: red, blue`
  
-### tf2 [server]
+### /tf2 [server]
 Connect to tf2 server. 
 `Servers: chicago1, chicago2, dallas1, mordor, rivendallas, morning, evening`
   
-### pugantiafk
+### /pugantiafk
 Toggles anti afk ON or OFF
   
-### antiafkmsg [message]
+### /antiafkmsg [message]
 Set anti-afk message to [message]. Default message: :)
   
-### pugautosounds
+### /pugautosounds
 Toggles Auto Sounds ON and OFF (Turns sounds on when you're added up, and sounds off after the game starts)
   
-### pugsounds
+### /pugsounds
 Toggles the sounds ON or OFF (Note: if you have auto sounds on, it will get changed unless you turn auto sounds off)
 
-### pugsounddirectory [directory]
+### /pugsounddirectory [directory]
 Set pug sounds directory to [directory]. Default directory: sounds/
   
-### mumbleusername [name]
+### /mumbleusername [name]
 Set your mumble user name to [name].
   
-### mumbledirectory [directory]
+### /mumbledirectory [directory]
 Set your mumble directory to [directory].
   
-### steamdirectory [directory]
+### /steamdirectory [directory]
 Set your steam directory to [directory].
 
 ## Installation Instructions
