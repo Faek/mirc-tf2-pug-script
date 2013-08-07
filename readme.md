@@ -1,5 +1,7 @@
 # tf2 pug script for mIRC by Dad
 
+![main screen](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot1.png)
+
 ## Features
 
 * **Pug Helper Form:** A dialog GUI to the pug so you don't need to type commands anymore.
