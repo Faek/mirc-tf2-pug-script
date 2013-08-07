@@ -83,10 +83,10 @@ Set your steam directory to [directory].
 2. In mIRC type `/load -rs tf2pug.mrc` or put the full path to the file in quotes if you extracted to a different directory. Click "Yes" on the dialog that asks if you would like to run the initialization commands (this configures the first time usage settings)
 
 3. When the "Options" screen pops up as soon as you load the script:
-    a. Enter your Mumble user name
-	b. Enter the path to your mumble installation eg: `C:\Program Files (x86)\mumble\`  **Note:** make sure ALL of your paths **end with a \** or launching mumble or tf2  _will not work_.
-	c. Enter the path to your steam installation eg: `C:\Program Files (x86)\steam\`
-	d. If you want enable afk protection, enable it in the options menu as well.
+    * Enter your Mumble user name
+	* Enter the path to your mumble installation eg: `C:\Program Files (x86)\mumble\`  **Note:** make sure ALL of your paths **end with a \** or launching mumble or tf2  _will not work_.
+	* Enter the path to your steam installation eg: `C:\Program Files (x86)\steam\`
+	* If you want enable afk protection, enable it in the options menu as well.
 	
 4. Click the "Add up to Pug" tab, choose your preferred channel & classes, and hit add.
 
