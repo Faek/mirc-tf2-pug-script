@@ -6,6 +6,7 @@
 ## Options Screen
 ![options screen](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot2.png)
 
+
 ## Features
 
 * **Pug Helper Form:** A dialog GUI to the pug so you don't need to type commands anymore.
@@ -13,7 +14,44 @@
 * **Auto Launch Mumble/TF2:** When teams are done being drafted and the pug starts, when you get a message from the pug messenger, a sound notification will tell you you what team you're on and what server, and mumble will launch and connect to the correct channel, and TF2 will launch and connect to the correct server. It also automatically sticks the server connect information into your clipboard if you need to use it in game.
 * **Anti AFK:** Respond automatically to the bot's AFK message to un-afk yourself. Note: You will be restricted if you do not show up to the PUG because you were ACTUALLY afk.
 * **Pug Message Window:** Automatically terminates all private messages from the PUG Bot and Messengers, and sticks all of the messages into a single window so you don't have a bunch of PMs open.
+
+
+## Download
+[https://github.com/Faek/mirc-tf2-pug-script/archive/master.zip](Download Here) or click the download zip button on the right
+
+
+
+## Installation Instructions
+
+**Before you install, make sure you have mIRC installed on your system. This will not work without mIRC**
+
+1. Extract zip file directly to your mIRC directory appdata directory
+    * If you're on windows XP, extract it directly to your `C:\Program Files\mIRC` folder or wherever you have mIRC installed
+    * If you're on vista, 7, or 8, extract the script to `%APPDATA%\mIRC`  There is a shortcut to that folder that comes with this script. (Also, If you hold the Windows Key + R the run dialog will pop up and just type that in to get to that folder)
+
+2. In mIRC type `/load -rs tf2pug.mrc` or put the full path to the file in quotes if you extracted to a different directory. Click "Yes" on the dialog that asks if you would like to run the initialization commands (this configures the first time usage settings)
+
+3. When the "Options" screen pops up as soon as you load the script:
+    * Enter your Mumble user name
+	* Enter the path to your mumble installation eg: `C:\Program Files (x86)\mumble\`  **Note:** make sure ALL of your paths **end with a \** or launching mumble or tf2  _will not work_.
+	* Enter the path to your steam installation eg: `C:\Program Files (x86)\steam\`
+	* If you want enable afk protection, enable it in the options menu as well.
 	
+4. Click the "Add up to Pug" tab, choose your preferred channel & classes, and hit add.
+
+5. Type /advert to tell all of ur best buds about ur kewl new script.
+
+
+## Upgrade Instructions
+
+1. In mIRC type `/unload -rs tf2pug.mrc` or put the full path to the file in quotes if you installed to a different directory.
+
+2. Unzip the new version and overwrite all of the original files.
+
+3. Follow the installation instructions above.
+
+
+
 ## Commands
 Note: Most commands are only for shortcuts and are available via the GUI or toolbar.
 
@@ -71,36 +109,6 @@ Set your mumble directory to [directory].
   
 ### /steamdirectory [directory]
 Set your steam directory to [directory].
-
-## Installation Instructions
-
-**Before you install, make sure you have mIRC installed on your system. This will not work without mIRC**
-
-1. Extract zip file directly to your mIRC directory appdata directory
-    * If you're on windows XP, extract it directly to your `C:\Program Files\mIRC` folder or wherever you have mIRC installed
-    * If you're on vista, 7, or 8, extract the script to `%APPDATA%\mIRC`  There is a shortcut to that folder that comes with this script. (Also, If you hold the Windows Key + R the run dialog will pop up and just type that in to get to that folder)
-
-2. In mIRC type `/load -rs tf2pug.mrc` or put the full path to the file in quotes if you extracted to a different directory. Click "Yes" on the dialog that asks if you would like to run the initialization commands (this configures the first time usage settings)
-
-3. When the "Options" screen pops up as soon as you load the script:
-    * Enter your Mumble user name
-	* Enter the path to your mumble installation eg: `C:\Program Files (x86)\mumble\`  **Note:** make sure ALL of your paths **end with a \** or launching mumble or tf2  _will not work_.
-	* Enter the path to your steam installation eg: `C:\Program Files (x86)\steam\`
-	* If you want enable afk protection, enable it in the options menu as well.
-	
-4. Click the "Add up to Pug" tab, choose your preferred channel & classes, and hit add.
-
-5. Type /advert to tell all of ur best buds about ur kewl new script.
-
-
-
-## Upgrade Instructions
-
-1. In mIRC type `/unload -rs tf2pug.mrc` or put the full path to the file in quotes if you installed to a different directory.
-
-2. Unzip the new version and overwrite all of the original files.
-
-3. Follow the installation instructions above.
 
 
 
