@@ -757,7 +757,7 @@ on *:TEXT:*You have been picked for*:?: {
     }
     closemsg $nick
     aline -p @tf2pugs $1-
-    clipboard $mid($1-, $int($pos($1-, :) + 2))
+    clipboard $mid($1-, $calc($pos($1-, :) + 2))
     if (You have been picked for isin $1-) {
       var %pughelper.pickedTeam
       if (Red Team isin $1-) { 
