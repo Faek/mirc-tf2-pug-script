@@ -17,7 +17,7 @@
 
 
 ## Download
-[https://github.com/Faek/mirc-tf2-pug-script/archive/master.zip](Download Here) or click the download zip button on the right
+[Download Here](https://github.com/Faek/mirc-tf2-pug-script/archive/master.zip) or click the download zip button on the right
 
 
 
