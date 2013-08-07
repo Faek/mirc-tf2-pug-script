@@ -36,6 +36,7 @@ on *:DIALOG:frmTF2Pugs:init:0: {
     did -c frmTF2Pugs 403
   }
   
+  did -a frmTF2Pugs 404 %pughelper.antiAFKmsg
   did -a frmTF2Pugs 501 %pughelper.mumbleUsername
   did -a frmTF2Pugs 502 %pughelper.mumbleDirectory
   did -a frmTF2Pugs 503 %pughelper.steamDirectory
@@ -95,18 +96,21 @@ dialog frmTF2Pugs {
   box "Pug Options", 6, 5 14 278 20, tab 4
   box "Mumble and Steam Options", 7, 5 34 278 69, tab 4
   text "Mumble Name", 8, 9 43 35 8, tab 4
-  edit "", 501, 8 52 37 10, tab 4
+  edit "", 501, 8 52 37 10, tab 4 autohs
   text "Sounds Directory", 12, 9 79 62 8, tab 4
-  edit "", 504, 8 88 238 10, tab 4
+  edit "", 504, 8 88 238 10, tab 4 autohs
   text "Steam Directory", 11, 9 61 62 8, tab 4
-  edit "", 503, 8 70 271 10, tab 4
+  edit "", 503, 8 70 271 10, tab 4 autohs
   check "Auto Toggle Sounds", 401, 7 21 58 10, tab 4
   check "Sounds On", 402, 70 21 37 10, tab 4
-  check "Enable Auto Anti AFK", 403, 214 21 61 10, tab 4
-  edit "", 502, 47 52 232 10, tab 4
+  check "Auto Anti AFK:", 403, 110 21 46 10, tab 4
+  edit "", 502, 47 52 232 10, tab 4 autohs
   text "Mumble Directory", 9, 48 43 62 8, tab 4
   button "Save All", 505, 247 87 32 12, tab 4
+  edit "", 404, 157 21 122 10, tab 4 autohs
 }
+
+
 
 
 
@@ -161,9 +165,7 @@ alias pugfirstload {
   set %pughelper.steamURLRivendallas steam://connect/hldallas.game.nfoservers.com:27015/timmy
   set %pughelper.steamURLMorning steam://connect/morning.tragicservers.com:27015/whythismap
   set %pughelper.steamURLEvening steam://connect/evening.tragicservers.com:27015/whythismap
-  $mumbleusername
-  $mumbledirectory
-  $steamdirectory
+  $pugopts
 }
 
 ;Display pug helper commands to user
@@ -173,6 +175,7 @@ alias pughelp {
   echo -a 5tf2.pug helper 1by 6Dad - https://github.com/Faek/mirc-tf2-pug-script
   echo -a 3Available Commands:
   echo -a 5/pug 1: Shows the tf2.pug helper form
+  echo -a 5/pugopts 1: Shows the tf2.pug helper form options. Please fill out these values correctly or the auto-launch won't work.
   echo -a 5/pugchannel 2[channel] 1: changes active channel between $(%pughelper.channel1) and $(%pughelper.channel2) and $(%pughelper.channel3)
   echo -a 3Add and remove commands:
   echo -a 5Toggle Classes 1: /captain /scout /soldier /pyro /demo /heavy /engineer /medic /sniper /spy /roamer /pocket
@@ -207,10 +210,17 @@ alias pug {
   }
 }
 
+alias pugopts {
+  
+  $pug
+  did -fu frmTF2Pugs 4
+  
+}
+
 alias pugadd {
 
   $pug_add
-
+  
 }
 
 
@@ -758,6 +768,20 @@ on *:TEXT:*You have been picked for*:?: {
         if (%pughelper.enableSounds == 1) { splay -q %pughelper.mircSoundDirectory $+ blue_team.wav }
         set %pughelper.pickedTeam blue
       }
+      if (%pughelper.enableSounds == 1) {
+        if (captain isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_captain.wav }
+        elseif (scout isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_scout.wav }
+        elseif (soldier isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_soldier.wav }
+        elseif (roamer isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_roamer.wav }
+        elseif (pocket isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_pocket.wav }
+        elseif (pyro isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_pyro.wav }
+        elseif (demo isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_demo.wav }
+        elseif (heavy isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_heavy.wav }
+        elseif (engineer isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_engineer.wav }
+        elseif (medic isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_medic.wav }
+        elseif (sniper isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_sniper.wav }
+        elseif (spy isin $1-) { splay -q %pughelper.mircSoundDirectory $+ picked_spy.wav }
+      }
       if (chicago1 isin $1-) { 
         if (%pughelper.enableSounds == 1) { splay -q %pughelper.mircSoundDirectory $+ chicago1.wav }
         $launch_mumble(chicago1,%pughelper.pickedTeam)
@@ -835,6 +859,7 @@ on *:text:*you are considered afk by the bot*:?:{
 
 alias -l save_dialog_options {
   
+  set %pughelper.antiAFKmsg $did(frmTF2Pugs,404).text
   set %pughelper.mumbleUsername $did(frmTF2Pugs,501).text
   set %pughelper.mumbleDirectory $did(frmTF2Pugs,502).text
   set %pughelper.steamDirectory $did(frmTF2Pugs,503).text

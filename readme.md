@@ -16,6 +16,9 @@ Advertise this script in the current channel <3
 
 ### /pug 
 Shows the tf2.pug helper form
+
+### /pugopts
+Shows the options tab on the helper form
     
 ### /pugchannel [channel]
 changes active channel between #tf2.pug.na, #tf2.pug.nahl, #tf2.mix.nahl
