@@ -1,6 +1,10 @@
 # tf2 pug script for mIRC by Dad
 
+## Main Screen
 ![main screen](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot1.png)
+
+## Options Screen
+![options screen](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot2.png)
 
 ## Features
 
