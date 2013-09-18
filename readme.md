@@ -29,7 +29,7 @@
 
 **Before you install, make sure you have mIRC installed on your system. This will not work without mIRC**
 
-1. Extract zip file directly to your mIRC directory appdata directory
+1. Extract everything from inside the folder mirc-tf2-pug-script-master in the zip file directly to your mIRC's  appdata directory
     * If you're on windows XP, extract it directly to your `C:\Program Files\mIRC` folder or wherever you have mIRC installed
     * If you're on vista, 7, or 8, extract the script to `%APPDATA%\mIRC`  There is a shortcut to that folder that comes with this script. (Also, If you hold the Windows Key + R the run dialog will pop up and just type that in to get to that folder)
 
@@ -41,9 +41,12 @@
 	* Enter the path to your steam installation eg: `C:\Program Files (x86)\steam\`
 	* If you want enable afk protection, enable it in the options menu as well.
 	
-4. Click the "Add up to Pug" tab, choose your preferred channel & classes, and hit add.
+4. If you reload mIRC you will see the new toolbar icons
+	
+5. Click the "Add up to Pug" tab, choose your preferred channel & classes, and hit add.
 
-5. Type /advert to tell all of ur best buds about ur kewl new script.
+6. Type /advert to tell all of ur best buds about ur kewl new script.
+
 
 
 ## Upgrade Instructions
