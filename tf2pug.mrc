@@ -186,9 +186,6 @@ on *:dialog:frmAntiAFKHelper:sclick:1: {
 ;initialize the TF2 helper form loading variables and setting the viewstate to the correct data
 on *:DIALOG:frmTF2Pugs:init:0: {
 
-  ;set the variable to know if the form is loaded or not
-  set %pughelper.formLoaded 1
-
   ; set the radio button to the correct pug channel
   if (%pughelper.activeChannel == %pughelper.channel1) {
     did -c frmTF2Pugs 101
@@ -242,7 +239,6 @@ on *:DIALOG:frmTF2Pugs:init:0: {
 ;dialog unload events
 on *:dialog:frmTF2Pugs:close:*:{
   $save_dialog_options
-  set %pughelper.formLoaded 0
 }
 
 ;saves all the dialog options
@@ -400,7 +396,6 @@ alias pugfirstload {
   set %pughelper.channel1 #tf2.pug.na
   set %pughelper.channel2 #tf2.pug.nahl
   set %pughelper.channel3 #tf2.mix.nahl
-  set %pughelper.formLoaded 0
   set %pughelper.activeChannel $(%pughelper.channel1)
   set %pughelper.enableSounds 0
   set %pughelper.autoToggleSounds 1
@@ -470,7 +465,7 @@ alias advert {
 
 ;display the pug helper dialog on the first tab
 alias pug {
-  if (%pughelper.formLoaded == 0) {
+  if ($dialog(frmTF2Pugs) == $null) {
     dialog -mv frmTF2Pugs frmTF2Pugs
   }
 }
@@ -723,10 +718,12 @@ alias pocket {
 
 ;test anti afk dialog
 alias testantiafk {
-  if (%pughelper.enableSounds == 1) {
-    splay -q %pughelper.mircSoundDirectory $+ afk.wav
-  } 
-  dialog -mdrov frmAntiAFKHelper frmAntiAFKHelper
+  if ($dialog(frmAntiAFKHelper) == $null) {
+    if (%pughelper.enableSounds == 1) {
+      splay -q %pughelper.mircSoundDirectory $+ afk.wav
+    } 
+    dialog -mdrov frmAntiAFKHelper frmAntiAFKHelper
+  }
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -869,7 +866,7 @@ alias -l toggle_antiafk {
 
 ;turns sounds on and off
 alias -l toggle_sounds {
-  if (%pughelper.formLoaded == 1) {
+  if ($dialog(frmTF2Pugs) != $null) {
     if ($did(frmTF2Pugs,402).state != $1) {
       if ($1 == 1) { 
         did -c frmTF2Pugs 402 
