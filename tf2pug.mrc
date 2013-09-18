@@ -1,72 +1,91 @@
-;initial script setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;SCRIPT INITIALIZATION;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;initialize script and ask for options from the user
 on *:load:{
   $pugfirstload
 }
 
+;add the toolbar icons when mIRC launches
 on *:start:{
   toolbar -a Pugs "Launch TF2 Pug Form" tf2.png "/pug"
+  toolbar -a PugAdd "Add to the pug" add.png "/pugadd"
+  toolbar -a PugRem "Remove from pug" remove.png "/pugremove"
 }
 
-;;;;;;;;;;;;;;;;;;;DIALOG CODE;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;END SCRIPT INITIALIZATION;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;dialog onload events
-on *:DIALOG:frmTF2Pugs:init:0: {
-  set %pughelper.formLoaded 1
-
-  if (%pughelper.activeChannel == %pughelper.channel1) {
-    did -c frmTF2Pugs 101
-  }
-  if (%pughelper.activeChannel == %pughelper.channel2) {
-    did -c frmTF2Pugs 102
-  }
-  if (%pughelper.activeChannel == %pughelper.channel3) {
-    did -c frmTF2Pugs 103
-  }
-
-  if (%pughelper.autoToggleSounds == 1) {
-    did -c frmTF2Pugs 401
-  }
-  
-  if (%pughelper.enableSounds == 1) {
-    did -c frmTF2Pugs 402
-  }
-  
-  if (%pughelper.antiAFK == 1) {
-    did -c frmTF2Pugs 403
-  }
-  
-  did -a frmTF2Pugs 404 %pughelper.antiAFKmsg
-  did -a frmTF2Pugs 501 %pughelper.mumbleUsername
-  did -a frmTF2Pugs 502 %pughelper.mumbleDirectory
-  did -a frmTF2Pugs 503 %pughelper.steamDirectory
-  did -a frmTF2Pugs 504 %pughelper.mircSoundDirectory
 
 
-  if (%pughelper.addCaptain == 1) did -c frmTF2Pugs 200
-  if (%pughelper.addScout == 1) did -c frmTF2Pugs 201
-  if (%pughelper.addSoldier == 1) did -c frmTF2Pugs 202
-  if (%pughelper.addPyro == 1) did -c frmTF2Pugs 203
-  if (%pughelper.addDemo == 1) did -c frmTF2Pugs 204
-  if (%pughelper.addHeavy == 1) did -c frmTF2Pugs 205
-  if (%pughelper.addEngineer == 1) did -c frmTF2Pugs 206
-  if (%pughelper.addMedic == 1) did -c frmTF2Pugs 207
-  if (%pughelper.addSniper == 1) did -c frmTF2Pugs 208
-  if (%pughelper.addSpy == 1) did -c frmTF2Pugs 209
-  if (%pughelper.addRoamer == 1) did -c frmTF2Pugs 210
-  if (%pughelper.addPocket == 1) did -c frmTF2Pugs 211
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;CUSTOM MENUS;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;create menu items for mIRC as shortcuts to the pug
+menu menubar {
+
+ -
+
+launch tf2
+.morning:$launch_tf2(%pughelper.steamURLMorning)
+.evening:$launch_tf2(%pughelper.steamURLEvening)
+.-
+.mordor:$launch_tf2(%pughelper.steamURLMordor)
+.rivendallas:$launch_tf2(%pughelper.steamURLRivendallas)
+.-
+.chicago1:$launch_tf2(%pughelper.steamURLChicago1)
+.chicago2:$launch_tf2(%pughelper.steamURLChicago2)
+.dallas1:$launch_tf2(%pughelper.steamURLDallas1)
+
+
+-
+
+launch mumble
+.morning red:$launch_mumble(morning,red)
+.morning blu:$launch_mumble(morning,blue)
+
+.evening red:$launch_mumble(evening,red)
+.evening blu:$launch_mumble(evening,blue)
+
+.-
+
+.mordor red:$launch_mumble(mordor,red)
+.mordor blu:$launch_mumble(mordor,blue)
+
+.rivendallas red:$launch_mumble(rivendallas,red)
+.rivendallas blu:$launch_mumble(rivendallas,blue)
+
+.-
+
+.chicago1 red:$launch_mumble(chicago1,red)
+.chicago1 blu:$launch_mumble(chicago1,blue)
+
+.chicago2 red:$launch_mumble(chicago2,red)
+.chicago2 blu:$launch_mumble(chicago2,blue)
+
+.dallas1 red:$launch_mumble(dallas1,red)
+.dallas1 blu:$launch_mumble(dallas1,blue)
 
 }
 
-
-;dialog unload events
-on *:dialog:frmTF2Pugs:close:*:{
-  $save_dialog_options
-  set %pughelper.formLoaded 0
-}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;END CUSTOM MENUS;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;dialog definition (layout)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;DIALOG DEFINITIONS;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;tf2 pug helper dialog definition (layout)
 dialog frmTF2Pugs {
   title "TF2 Pugs"
   size -1 -1 287 107
@@ -111,16 +130,257 @@ dialog frmTF2Pugs {
 }
 
 
+;anti afk helper dialog definition (layout)
+dialog frmAntiAFKHelper {
+  title "Anti AFK Helper"
+  size -1 -1 191 75
+  option dbu
+  button "I AM NOT AFK", 1, 22 37 145 21, default ok
+  edit ".", 2, 22 25 145 10, autohs
+  text "Please confirm that you are not AFK", 3, 22 16 144 7, center
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;END DIALOG DEFINITIONS;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
 
 
-;;;;;;;;;;END DIALOG CODE;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;DIALOG EVENTS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;;;;;;;;;ALIASES (COMMANDS);;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;ANTI AFK DIALOG EVENTS;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;anti afk dialog onload events
+on *:DIALOG:frmAntiAFKHelper:init:0: {
+  did -a frmTF2Pugs 404 %pughelper.antiAFKmsg
+}
+
+;anti afk dialog unload events
+on *:dialog:frmAntiAFKHelper:close:*:{
+  set %pughelper.antiAFKmsg $did(frmAntiAFKHelper,2).text
+}
+
+;anti AFK dialog button click
+on *:dialog:frmAntiAFKHelper:sclick:1: {
+  set %pughelper.antiAFKmsg $did(frmAntiAFKHelper,2).text
+  msg %pughelper.activeChannel %pughelper.antiAFKmsg 
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;END AFK DIALOG EVENTS;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;TF2 HELPER FORM DIALOG EVENTS;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;initialize the TF2 helper form loading variables and setting the viewstate to the correct data
+on *:DIALOG:frmTF2Pugs:init:0: {
+
+  ;set the variable to know if the form is loaded or not
+  set %pughelper.formLoaded 1
+
+  ; set the radio button to the correct pug channel
+  if (%pughelper.activeChannel == %pughelper.channel1) {
+    did -c frmTF2Pugs 101
+  }
+  if (%pughelper.activeChannel == %pughelper.channel2) {
+    did -c frmTF2Pugs 102
+  }
+  if (%pughelper.activeChannel == %pughelper.channel3) {
+    did -c frmTF2Pugs 103
+  }
+
+  ;set the auto toggle sounds checkbox
+  if (%pughelper.autoToggleSounds == 1) {
+    did -c frmTF2Pugs 401
+  }
+
+  ;set the enable sounds checkbox
+  if (%pughelper.enableSounds == 1) {
+    did -c frmTF2Pugs 402
+  }
+
+  ;set the auto anti afk checkbox
+  if (%pughelper.antiAFK == 1) {
+    did -c frmTF2Pugs 403
+  }
+
+  ;fill all of the text boxes with the appropriate settings
+  did -a frmTF2Pugs 404 %pughelper.antiAFKmsg
+  did -a frmTF2Pugs 501 %pughelper.mumbleUsername
+  did -a frmTF2Pugs 502 %pughelper.mumbleDirectory
+  did -a frmTF2Pugs 503 %pughelper.steamDirectory
+  did -a frmTF2Pugs 504 %pughelper.mircSoundDirectory
+
+  ;set all of the class checkboxes
+  if (%pughelper.addCaptain == 1) did -c frmTF2Pugs 200
+  if (%pughelper.addScout == 1) did -c frmTF2Pugs 201
+  if (%pughelper.addSoldier == 1) did -c frmTF2Pugs 202
+  if (%pughelper.addPyro == 1) did -c frmTF2Pugs 203
+  if (%pughelper.addDemo == 1) did -c frmTF2Pugs 204
+  if (%pughelper.addHeavy == 1) did -c frmTF2Pugs 205
+  if (%pughelper.addEngineer == 1) did -c frmTF2Pugs 206
+  if (%pughelper.addMedic == 1) did -c frmTF2Pugs 207
+  if (%pughelper.addSniper == 1) did -c frmTF2Pugs 208
+  if (%pughelper.addSpy == 1) did -c frmTF2Pugs 209
+  if (%pughelper.addRoamer == 1) did -c frmTF2Pugs 210
+  if (%pughelper.addPocket == 1) did -c frmTF2Pugs 211
+
+}
+
+
+;dialog unload events
+on *:dialog:frmTF2Pugs:close:*:{
+  $save_dialog_options
+  set %pughelper.formLoaded 0
+}
+
+;saves all the dialog options
+alias -l save_dialog_options {
+
+  set %pughelper.antiAFKmsg $did(frmTF2Pugs,404).text
+  set %pughelper.mumbleUsername $did(frmTF2Pugs,501).text
+  set %pughelper.mumbleDirectory $did(frmTF2Pugs,502).text
+  set %pughelper.steamDirectory $did(frmTF2Pugs,503).text
+  set %pughelper.mircSoundDirectory $did(frmTF2Pugs,504).text 
+
+}
+
+;set active channel to tf2.pug.na from dialog
+on *:dialog:frmTF2Pugs:sclick:101: {
+  if ($did(frmTF2Pugs,101).state == 1) set %pughelper.activeChannel $(%pughelper.channel1)
+}
+
+;set active channel to tf2.pug.nahl from dialog
+on *:dialog:frmTF2Pugs:sclick:102: {
+  if ($did(frmTF2Pugs,102).state == 1) set %pughelper.activeChannel $(%pughelper.channel2)
+}
+
+;set active channel to tf2.pug.nahl from dialog
+on *:dialog:frmTF2Pugs:sclick:103: {
+  if ($did(frmTF2Pugs,103).state == 1) set %pughelper.activeChannel $(%pughelper.channel3)
+}
+
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:200: {
+  $toggle_captain($did(frmTF2Pugs,200).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:201: {
+  $toggle_scout($did(frmTF2Pugs,201).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:202: {
+  $toggle_soldier($did(frmTF2Pugs,202).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:203: {
+  $toggle_pyro($did(frmTF2Pugs,203).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:204: {
+  $toggle_demo($did(frmTF2Pugs,204).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:205: {
+  $toggle_heavy($did(frmTF2Pugs,205).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:206: {
+  $toggle_engineer($did(frmTF2Pugs,206).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:207: {
+  $toggle_medic($did(frmTF2Pugs,207).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:208: {
+  $toggle_sniper($did(frmTF2Pugs,208).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:209: {
+  $toggle_spy($did(frmTF2Pugs,209).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:210: {
+  $toggle_roamer($did(frmTF2Pugs,210).state)
+}
+
+;toggle captain from dialog
+on *:dialog:frmTF2Pugs:sclick:211: {
+  $toggle_pocket($did(frmTF2Pugs,211).state)
+}
+
+
+;add from dialog
+on *:dialog:frmTF2Pugs:sclick:301: {
+  $pug_add
+}
+
+;remove from dialog
+on *:dialog:frmTF2Pugs:sclick:302: {
+  $pug_remove
+}
+
+;toggle auto sound toggle
+on *:dialog:frmTF2Pugs:sclick:401: {
+  $toggle_auto_sound($did(frmTF2Pugs,401).state)
+}
+
+;toggle sound from dialog
+on *:dialog:frmTF2Pugs:sclick:402: {
+  $toggle_sounds($did(frmTF2Pugs,402).state)
+}
+
+;toggle anti afk
+on *:dialog:frmTF2Pugs:sclick:403: {
+  $toggle_antiafk($did(frmTF2Pugs,403).state)
+}
+
+;Save button on helper form
+on *:dialog:frmTF2Pugs:sclick:505: {
+  $save_dialog_options
+}
+
+;Note: Close button doesn't have an event because it's a "Cancel" button so it closes the form
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;END TF2 HELPER FORM DIALOG EVENTS;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;END DIALOG EVENTS;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;ALIASES (COMMANDS);;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;reload initial configuration
 alias pugrehash {
 
   $pugfirstload
@@ -197,33 +457,40 @@ alias pughelp {
   echo -a ************************************************************************************************
 }
 
+
+;show anti afk dialog
+
+
+;advertise this script to the channel
 alias advert {
-  
+
   msg $chan I am using Dad's TF2 Pug Script for mIRC! Get it here: https://github.com/Faek/mirc-tf2-pug-script
-  
+
 }
 
-;load pug helper dialog
+;display the pug helper dialog on the first tab
 alias pug {
   if (%pughelper.formLoaded == 0) {
     dialog -mv frmTF2Pugs frmTF2Pugs
   }
 }
 
+;display the pug helper form on the options tab
 alias pugopts {
-  
+
   $pug
   did -fu frmTF2Pugs 4
-  
+
 }
 
+;add to the pug
 alias pugadd {
 
   $pug_add
-  
+
 }
 
-
+;toggle sounds on and off
 alias pugsounds { 
   if (%pughelper.enableSounds == 1) {
     $toggle_sounds(0)
@@ -233,7 +500,7 @@ alias pugsounds {
   }
 }
 
-
+;toggle pug auto sounds on and off
 alias pugautosounds { 
   if (%pughelper.autoToggleSounds == 1) {
     $toggle_auto_sound(0)
@@ -243,6 +510,7 @@ alias pugautosounds {
   }
 }
 
+;toggle auto anti afk on and off
 alias antiafk { 
   if (%pughelper.antiAFK == 1) {
     $toggle_antiafk(0)
@@ -252,6 +520,7 @@ alias antiafk {
   }
 }
 
+;set the anti afk message via the command line
 alias antiafkmsg {
   set %pughelper.antiAFKmsg $1-
   echo -a Anti AFK Message set to $1-
@@ -343,6 +612,7 @@ alias pugremove { $pug_remove }
 
 
 ;toggle class aliases
+;toggle adding up as captain
 alias captain { 
   if (%pughelper.addCaptain == 1) {
     $toggle_captain(0)
@@ -351,6 +621,7 @@ alias captain {
     $toggle_captain(1)              
   }
 }
+;toggle adding up as scout
 alias scout { 
   if (%pughelper.addScout == 1) {
     $toggle_scout(0)
@@ -359,6 +630,7 @@ alias scout {
     $toggle_scout(1)              
   }
 }
+;toggle adding up as soldier
 alias soldier { 
   if (%pughelper.addSoldier == 1) {
     $toggle_soldier(0)
@@ -367,6 +639,7 @@ alias soldier {
     $toggle_soldier(1)              
   }
 }
+;toggle adding up as pyro
 alias pyro { 
   if (%pughelper.addPyro == 1) {
     $toggle_pyro(0)
@@ -375,6 +648,7 @@ alias pyro {
     $toggle_pyro(1)              
   }
 }
+;toggle adding up as demo
 alias demo { 
   if (%pughelper.addDemo == 1) {
     $toggle_demo(0)
@@ -383,6 +657,7 @@ alias demo {
     $toggle_demo(1)              
   }
 }
+;toggle adding up as heavy
 alias heavy { 
   if (%pughelper.addHeavy == 1) {
     $toggle_heavy(0)
@@ -391,6 +666,7 @@ alias heavy {
     $toggle_heavy(1)              
   }
 }
+;toggle adding up as engineer
 alias engineer { 
   if (%pughelper.addEngineer == 1) {
     $toggle_engineer(0)
@@ -399,6 +675,7 @@ alias engineer {
     $toggle_engineer(1)              
   }
 }
+;toggle adding up as medic
 alias medic { 
   if (%pughelper.addMedic == 1) {
     $toggle_medic(0)
@@ -407,6 +684,7 @@ alias medic {
     $toggle_medic(1)              
   }
 }
+;toggle adding up as sniper
 alias sniper { 
   if (%pughelper.addSniper == 1) {
     $toggle_sniper(0)
@@ -415,6 +693,7 @@ alias sniper {
     $toggle_sniper(1)              
   }
 }
+;toggle adding up as spy
 alias spy { 
   if (%pughelper.addEngineer == 1) {
     $toggle_spy(0)
@@ -423,6 +702,7 @@ alias spy {
     $toggle_spy(1)              
   }
 }
+;toggle adding up as roamer
 alias roamer { 
   if (%pughelper.addRoamer == 1) {
     $toggle_roamer(0)
@@ -431,6 +711,7 @@ alias roamer {
     $toggle_roamer(1)              
   }
 }
+;toggle adding up as pocket
 alias pocket { 
   if (%pughelper.addPocket == 1) {
     $toggle_pocket(0)
@@ -440,10 +721,24 @@ alias pocket {
   }
 }
 
-;;;;;;;;;;;;;;;;;;;;;END ALIASES (COMMANDS);;;;;;;;;;;;;;;;;;;;;;
+;test anti afk dialog
+alias testantiafk {
+  if (%pughelper.enableSounds == 1) {
+    splay -q %pughelper.mircSoundDirectory $+ afk.wav
+  } 
+  dialog -mdrov frmAntiAFKHelper frmAntiAFKHelper
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;END ALIASES (COMMANDS);;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;;;;;;;;;;;;;;;;LOCAL ALIASES (FUNCTIONS);;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;LOCAL ALIASES (FUNCTIONS);;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;toggles add as scout 
 alias -l toggle_captain {
@@ -557,7 +852,7 @@ alias -l toggle_pocket {
 alias -l pug_remove {
 
   if (%pughelper.enableSounds == 1) {
-     splay -q %pughelper.mircSoundDirectory $+ remove.wav
+    splay -q %pughelper.mircSoundDirectory $+ remove.wav
   }
   if (%pughelper.autoToggleSounds == 1) {
     $toggle_sounds(0)
@@ -566,11 +861,13 @@ alias -l pug_remove {
   msg %pughelper.activeChannel !remove
 }
 
+;turns anti afk on and off
 alias -l toggle_antiafk {
   set %pughelper.AntiAFK $1  
   echo -a Anti AFK is $+ $chr(32) $+ $iif($1 == 1, on, off)
 }
 
+;turns sounds on and off
 alias -l toggle_sounds {
   if (%pughelper.formLoaded == 1) {
     if ($did(frmTF2Pugs,402).state != $1) {
@@ -586,11 +883,13 @@ alias -l toggle_sounds {
   echo -a Sounds are now $+ $chr(32) $+ $iif($1 == 1, on, off) $+ $chr(32) $+ at $(%pughelper.activeChannel)
 }
 
+;toggles having the auto sound on and off
 alias -l toggle_auto_sound {
   set %pughelper.autoToggleSounds $1  
   echo -a Auto toggle sounds is now $+ $chr(32) $+ $iif($1 == 1, on, off)
 }
 
+;gets a list of your selected classes from the tf2 form
 alias -l get_classes {
 
   var %classList
@@ -611,13 +910,14 @@ alias -l get_classes {
 
 }
 
+;adds you to the pug with your selected classes from the tf2 form
 alias -l pug_add {
 
   if (%pughelper.autoToggleSounds == 1) {
     $toggle_sounds(1)
   }
   if (%pughelper.enableSounds == 1) {
-     splay -q %pughelper.mircSoundDirectory $+ ready.wav
+    splay -q %pughelper.mircSoundDirectory $+ ready.wav
   }
 
   msg %pughelper.activeChannel !add $+ $chr(32) $+ $get_classes
@@ -679,13 +979,26 @@ alias -l launch_tf2 {
   run %pughelper.steamDirectory $+ steam.exe $1
 }
 
-;;;;;;;;;;;;;END LOCAL ALIASES (FUNCTIONS);;;;;;;;;;;;;;
+;helper function to add a line to the consolidated bot messenger window
+alias -l aline_tf2win {
+  if ($window(@tf2pugs) == $null) {
+  window @tf2pugs
+    ; Opens the window if the window is  not already open
+  }
+  aline -p @tf2pugs $1-
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;END LOCAL ALIASES (FUNCTIONS);;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
 
-;;;;;;;;;;;;;;;;PUBLIC CHANNEL TEXT EVENTS;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;PUBLIC CHANNEL TEXT EVENTS;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;Teams are being drafted
 on *:text:*Teams are being drafted*:%pughelper.activeChannel:{
@@ -715,20 +1028,11 @@ on *:text:*It is*turn to pick*:%pughelper.activeChannel:{
   }
 }
 
-;Force sounds to be on while you're in the pug. (This is probably not necessary)
-;on *:text:*users added*:%pughelper.activeChannel:{
-;  if ((Messenger isin $nick) || (Bot isin $nick)) && ($me isin $1-) {
-;    if (%pughelper.autoToggleSounds == 1) {
-;      $toggle_sounds(1)
-;    }
-;  }
-;}
-
 ;Play remove sound if sounds are on and turn sounds off if you removed from the pug if auto toggle is on
 on *:INPUT:%pughelper.activeChannel:{
   if (!remove isin $1-) {
     if (%pughelper.enableSounds == 1) {
-       splay -q %pughelper.mircSoundDirectory $+ remove.wav
+      splay -q %pughelper.mircSoundDirectory $+ remove.wav
     }
     if (%pughelper.autoToggleSounds == 1) {
       $toggle_sounds(0)
@@ -739,24 +1043,42 @@ on *:INPUT:%pughelper.activeChannel:{
       $toggle_sounds(1)
     }
     if (%pughelper.enableSounds == 1) {
-       splay -q %pughelper.mircSoundDirectory $+ ready.wav
+      splay -q %pughelper.mircSoundDirectory $+ ready.wav
     }
   }
 }
-;;;;;;;;;;;;;;END PUBLIC CHANNEL TEXT EVENTS;;;;;
+
+; show the teams in the main pug window if you're on it
+on *:text:*Red Team*:%pughelper.activeChannel:{
+  if (((Messenger isin $nick) || (Bot isin $nick)) && ($me isin $1-)) {
+    $aline_tf2win($1-)
+  }
+}
+
+; shows the teams in the main pug window 
+on *:text:*Blu Team*:%pughelper.activeChannel:{
+  if (((Messenger isin $nick) || (Bot isin $nick)) && ($me isin $1-)) {
+    $aline_tf2win($1-)   
+  }
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;END PUBLIC CHANNEL TEXT EVENTS;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
 
-;;;;;;;;;;;;;;PRIVATE MESSAGE TEXT EVENTS;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;PRIVATE MESSAGE TEXT EVENTS;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;auto launch mumble and TF2 and join the correct server/channel in mumble and the correct tf2 server
 on *:TEXT:*You have been picked for*:?: {
   if ((Messenger isin $nick) || (Bot isin $nick)) {
-    if ($window(@tf2pugs) == $null) {
-      window @tf2pugs
-      ; Opens the window if the window is  not already open
-    }
+    $aline_tf2win($1-)
     closemsg $nick
-    aline -p @tf2pugs $1-
     clipboard $mid($1-, $calc($pos($1-, :) + 2))
     if (You have been picked for isin $1-) {
       var %pughelper.pickedTeam
@@ -829,153 +1151,22 @@ on *:TEXT:*You have been picked for*:?: {
 on *:text:*you are considered afk by the bot*:?:{
   if ((Messenger isin $nick) || (Bot isin $nick)) {
     if (%pughelper.antiAFK == 1) {
+      ;auto afk handler, close message, and auto reply to the afk message in the chat and don't play the afk sound
       closemsg $nick
       msg %pughelper.activeChannel %pughelper.antiAFKmsg  
     } 
     else {
-      if ($window(@tf2pugs) == $null) {
-        window @tf2pugs
-        ; Opens the window if the window is  not already open
-      }
-      closemsg $nick
-      aline -p @tf2pugs $1-   
+      ;non auto afk handler, pop up a message and require user interaction to un-afk
       if (%pughelper.enableSounds == 1) {
         splay -q %pughelper.mircSoundDirectory $+ afk.wav
       } 
-      else {
-        flash -b5r2 @tf2pugs You are AFK!!!         
-      }
+      dialog -mdrov frmAntiAFKHelper frmAntiAFKHelper
+      $aline_tf2win($1-)
+      closemsg $nick
     }
   }
 }
 
-;;;;;;;;;;;;;;END PRIVATE MESSAGE TEXT EVENTS;;;;;;
-
-
-
-
-
-;;;;;;;;;;;;;;;DIALOG EVENTS;;;;;;;;;;;;;;;;;;
-
-alias -l save_dialog_options {
-  
-  set %pughelper.antiAFKmsg $did(frmTF2Pugs,404).text
-  set %pughelper.mumbleUsername $did(frmTF2Pugs,501).text
-  set %pughelper.mumbleDirectory $did(frmTF2Pugs,502).text
-  set %pughelper.steamDirectory $did(frmTF2Pugs,503).text
-  set %pughelper.mircSoundDirectory $did(frmTF2Pugs,504).text 
-    
-}
-
-;set active channel to tf2.pug.na from dialog
-on *:dialog:frmTF2Pugs:sclick:101: {
-  if ($did(frmTF2Pugs,101).state == 1) set %pughelper.activeChannel $(%pughelper.channel1)
-}
-
-;set active channel to tf2.pug.nahl from dialog
-on *:dialog:frmTF2Pugs:sclick:102: {
-  if ($did(frmTF2Pugs,102).state == 1) set %pughelper.activeChannel $(%pughelper.channel2)
-}
-
-;set active channel to tf2.pug.nahl from dialog
-on *:dialog:frmTF2Pugs:sclick:103: {
-  if ($did(frmTF2Pugs,103).state == 1) set %pughelper.activeChannel $(%pughelper.channel3)
-}
-
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:200: {
-  $toggle_captain($did(frmTF2Pugs,200).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:201: {
-  $toggle_scout($did(frmTF2Pugs,201).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:202: {
-  $toggle_soldier($did(frmTF2Pugs,202).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:203: {
-  $toggle_pyro($did(frmTF2Pugs,203).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:204: {
-  $toggle_demo($did(frmTF2Pugs,204).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:205: {
-  $toggle_heavy($did(frmTF2Pugs,205).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:206: {
-  $toggle_engineer($did(frmTF2Pugs,206).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:207: {
-  $toggle_medic($did(frmTF2Pugs,207).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:208: {
-  $toggle_sniper($did(frmTF2Pugs,208).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:209: {
-  $toggle_spy($did(frmTF2Pugs,209).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:210: {
-  $toggle_roamer($did(frmTF2Pugs,210).state)
-}
-
-;toggle captain from dialog
-on *:dialog:frmTF2Pugs:sclick:211: {
-  $toggle_pocket($did(frmTF2Pugs,211).state)
-}
-
-
-;add from dialog
-on *:dialog:frmTF2Pugs:sclick:301: {
-  $pug_add
-}
-
-;remove from dialog
-on *:dialog:frmTF2Pugs:sclick:302: {
-  $pug_remove
-}
-
-;toggle auto sound toggle
-on *:dialog:frmTF2Pugs:sclick:401: {
-  $toggle_auto_sound($did(frmTF2Pugs,401).state)
-}
-
-;toggle sound from dialog
-on *:dialog:frmTF2Pugs:sclick:402: {
-  $toggle_sounds($did(frmTF2Pugs,402).state)
-}
-
-;toggle anti afk
-on *:dialog:frmTF2Pugs:sclick:403: {
-  $toggle_antiafk($did(frmTF2Pugs,403).state)
-}
-
-
-on *:dialog:frmTF2Pugs:sclick:505: {
-  $save_dialog_options
-}
-
-
-;Note: Close button doesn't have an event because it's a "Cancel" button so it closes the form
-
-
-;;;;;;;;;;;;;END DIALOG EVENTS;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;END PRIVATE MESSAGE TEXT EVENTS;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

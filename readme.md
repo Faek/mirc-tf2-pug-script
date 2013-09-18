@@ -6,13 +6,17 @@
 ## Options Screen
 ![options screen](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot2.png)
 
+## AFK Desktop Popup
+![afk popup](https://raw.github.com/Faek/mirc-tf2-pug-script/master/screenshot3.png)
+
 
 ## Features
 
 * **Pug Helper Form:** A dialog GUI to the pug so you don't need to type commands anymore.
 * **Sounds:** Sounds on all major events in pug eg: Teams being drafted, Sub Needed, afk notices, when it's your turn to pick as captain, that you have been picked and the game is starting, etc..
 * **Auto Launch Mumble/TF2:** When teams are done being drafted and the pug starts, when you get a message from the pug messenger, a sound notification will tell you you what team you're on and what server, and mumble will launch and connect to the correct channel, and TF2 will launch and connect to the correct server. It also automatically sticks the server connect information into your clipboard if you need to use it in game.
-* **Anti AFK:** Respond automatically to the bot's AFK message to un-afk yourself. Note: You will be restricted if you do not show up to the PUG because you were ACTUALLY afk.
+* **Anti AFK:** Respond automatically to the bot's AFK message to un-afk yourself. **Note: You will be restricted FOR ONE MONTH!!!** if you do not show up to the PUG because you were ACTUALLY afk when the game started.
+* **AFK Warning:** If you don't have auto anti afk on, you will get a popup in the middle of your screen telling you that you're AFK and a sound notification if you have sounds enabled. Click the button and it will reply with your anti afk message.
 * **Pug Message Window:** Automatically terminates all private messages from the PUG Bot and Messengers, and sticks all of the messages into a single window so you don't have a bunch of PMs open.
 
 
