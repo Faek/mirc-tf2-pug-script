@@ -136,7 +136,7 @@ dialog frmAntiAFKHelper {
   size -1 -1 191 75
   option dbu
   button "I AM NOT AFK", 1, 22 37 145 21, default ok
-  edit ".", 2, 22 25 145 10, autohs
+  edit "", 2, 22 25 145 10, autohs
   text "Please confirm that you are not AFK", 3, 22 16 144 7, center
 }
 
@@ -160,7 +160,7 @@ dialog frmAntiAFKHelper {
 
 ;anti afk dialog onload events
 on *:DIALOG:frmAntiAFKHelper:init:0: {
-  did -a frmTF2Pugs 404 %pughelper.antiAFKmsg
+  did -a frmAntiAFKHelper 2 %pughelper.antiAFKmsg
 }
 
 ;anti afk dialog unload events
